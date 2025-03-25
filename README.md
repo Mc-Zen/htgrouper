@@ -1,6 +1,6 @@
 # HT-Grouper 
 
-This repository is maintained by Kyano Levi and Daniel Miller [(AG Eisert, FU Berlin)](https://www.physik.fu-berlin.de/en/einrichtungen/ag/ag-eisert/people/index.html).
+This repository is maintained by Kyano Levi and Daniel Miller [(AG Eisert, FU Berlin)](https://www.physik.fu-berlin.de/en/einrichtungen/ag/ag-eisert/team/index.html).
 
 ## Grouping Pauli operators into commuting sets that admit hardware-tailored readout circuits
 
