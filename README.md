@@ -4,7 +4,7 @@ This repository is maintained by Kyano Levi and Daniel Miller [(AG Eisert, FU Be
 
 ## Grouping Pauli operators into commuting sets that admit hardware-tailored readout circuits
 
-In the preprint [Hardware-Tailored Diagonalization Circuits](https://doi.org/10.48550/arXiv.2203.03646), Daniel Miller _et al._ developed a theoretical framework for the construction of hardware-tailored readout circuits.
+In [Hardware-Tailored Diagonalization Circuits, npj Quantum Information 10, 122 (2024)]([https://doi.org/10.48550/arXiv.2203.03646](https://doi.org/10.1038/s41534-024-00901-1)), Miller _et al._ develop a theoretical framework for the construction of hardware-tailored readout circuits.
 The original implementation of the accompanying algorithms is not publically available.
 However, the working principle of the grouping algorithms are precisely described in [Sec. II](https://doi.org/10.48550/arXiv.2203.03646)  of the supplementary material.
 This enabled us to reimplement an open-source version of one of the algorithms. 
