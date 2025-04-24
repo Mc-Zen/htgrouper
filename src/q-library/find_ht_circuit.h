@@ -2,7 +2,6 @@
 #include "gurobi_c++.h"
 #include "graph.h"
 #include "binary_pauli.h"
-#include "symbolic.h"
 
 #include <cassert>
 #include <optional>
@@ -91,7 +90,7 @@ namespace Q {
 
 			return optimize(constraints, verbose);
 		}
-		
+
 
 		/// @brief Find a Local Clifford (if it exists) that rotates a given stabilizer into a given graph state |Γ〉. 
 		/// @param graph    Graph that describes the graph state |Γ〉
