@@ -103,16 +103,24 @@ namespace Q::efficient {
 			}
 			return mat;
 		}
+    
+		//constexpr friend static efficient::BinaryVector<n> operator*(efficient::BinaryVector<m> vector, const BinaryColMatrix<m, n>& matrix) {
+		//	efficient::BinaryVector<n> result{};
+		//	for (size_t col = 0; col < n; ++col) {
+		//		result.set(col, matrix[col].dot(vector));
+		//	}
+		//	return result;
+		//}
 	};
 
-	template<int m, int n>
-	constexpr efficient::BinaryVector<n> operator*(efficient::BinaryVector<m> vector, const BinaryColMatrix<m, n>& matrix) {
-		efficient::BinaryVector<n> result{};
-		for (size_t col = 0; col < n; ++col) {
-			result.set(col, matrix[col].dot(vector));
-		}
-		return result;
-	}
+// 	template<int m, int n>
+// 	constexpr efficient::BinaryVector<n> operator*(efficient::BinaryVector<m> vector, const BinaryColMatrix<m, n>& matrix) {
+// 		efficient::BinaryVector<n> result{};
+// 		for (size_t col = 0; col < n; ++col) {
+// 			result.set(col, matrix[col].dot(vector));
+// 		}
+// 		return result;
+// 	}
 
 	template<int m, int n>
 	struct BinaryRowMatrix {
@@ -147,6 +155,14 @@ namespace Q::efficient {
 			}
 			return mat;
 		}
+
+		//constexpr friend static efficient::BinaryVector<m> operator*(const BinaryRowMatrix<m, n>& matrix, efficient::BinaryVector<n> vector) {
+		//	BinaryVector<m> result{};
+		//	for (size_t row = 0; row < m; ++row) {
+		//		result.set(row, matrix[row].dot(vector));
+		//	}
+		//	return result;
+		//}
 
 	};
 

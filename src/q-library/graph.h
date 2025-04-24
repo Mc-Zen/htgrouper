@@ -49,22 +49,22 @@ namespace Q {
 		}
 
 		constexpr static auto fullyConnected() requires (!is_dynamic) { return Graph{}.fullyConnect(); }
-		constexpr static auto fullyConnected(int num) requires (is_dynamic) { return Graph{ num }.fullyConnect(); }
+		constexpr static auto fullyConnected(int n_) requires (is_dynamic) { return Graph{ n_ }.fullyConnect(); }
 
 		constexpr static auto squareLattice() requires (!is_dynamic) { return Graph{}.makeSquareLattice(); }
-		constexpr static auto squareLattice(int num) requires (is_dynamic) { return Graph{ num }.makeSquareLattice(); }
+		constexpr static auto squareLattice(int n_) requires (is_dynamic) { return Graph{ n_ }.makeSquareLattice(); }
 
 		constexpr static auto star(int center = 0) requires (!is_dynamic) { return Graph{}.makeStar(center); }
-		constexpr static auto star(int num, int center = 0) requires (is_dynamic) { return Graph{ num }.makeStar(center); }
+		constexpr static auto star(int n_, int center = 0) requires (is_dynamic) { return Graph{ n_ }.makeStar(center); }
 
 		constexpr static auto linear() requires (!is_dynamic) { return Graph{}.makeLinear(); }
-		constexpr static auto linear(int num) requires (is_dynamic) { return Graph{ num }.makeLinear(); }
+		constexpr static auto linear(int n_) requires (is_dynamic) { return Graph{ n_ }.makeLinear(); }
 
 		constexpr static auto cycle() requires (!is_dynamic) { return Graph{}.makeCycle(); }
-		constexpr static auto cycle(int num) requires (is_dynamic) { return Graph{ num }.makeCycle(); }
+		constexpr static auto cycle(int n_) requires (is_dynamic) { return Graph{ n_ }.makeCycle(); }
 
 		constexpr static auto pusteblume() requires (!is_dynamic) { return Graph{}.makePusteblume(); }
-		constexpr static auto pusteblume(int num) requires (is_dynamic) { return Graph{ num }.makePusteblume(); }
+		constexpr static auto pusteblume(int n_) requires (is_dynamic) { return Graph{ n_ }.makePusteblume(); }
 
 		constexpr const AdjacencyMatrix& getAdjacencyMatrix() const { return adjacencyMatrix; }
 

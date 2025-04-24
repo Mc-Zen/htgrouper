@@ -3,7 +3,8 @@
 #include "graph.h"
 #include "hamiltonian.h"
 #include "ht_circuits.h"
-
+#include "find_ht_circuit.h"
+#include <random>
 
 namespace Q {
 
@@ -34,8 +35,6 @@ namespace Q {
 	bool locallyCommutesWithAll(const std::vector<Pauli>& collection, const Pauli& pauli, uint64_t support);
 
 	bool is_ht_measurable(const std::vector<Pauli>& collection, const Graph<>& graph);
-
-	//bool is_ht_measurable(const std::vector<Pauli>& collection, const Graph<>& graph, HTCircuitFinder& finder);
 
 
 	/// @brief Check if given set of Paulis is measurable with a hardware tailored circuit using one
@@ -94,5 +93,90 @@ namespace Q {
 	/// @param verbose       If set to true, will print current status to stdout console output
 	/// @return Sets of commuting operators
 	std::vector<CollectionWithGraph> applyPauliGrouper2Multithread(const Hamiltonian& hamiltonian, const std::vector<Graph<>>& graphs, int numThreads = 1, bool verbose = true);
-	std::vector<CollectionWithGraph> applyPauliGrouper2Multithread2(const Hamiltonian& hamiltonian, const std::vector<Graph<>>& graphs, int numThreads = 1, bool extractComputationalBasis = true, bool verbose = true);
+	std::vector<CollectionWithGraph> applyPauliGrouper2Multithread2(
+		const Hamiltonian& hamiltonian,
+		const std::vector<Graph<>>& graphs,
+		int numThreads = 1,
+		bool extractComputationalBasis = true,
+		bool verbose = true//,
+		//int intermediateFileFrequency = 0
+	);
+
+
+
+	struct GraphRepr {
+		explicit GraphRepr(const Graph<>& graph) : graph(graph), connectedComponents(graph.connectedComponents(true)) {
+			for (const auto& component : connectedComponents) {
+				uint64_t supportVector{};
+				for (auto vertex : component) {
+					supportVector |= (1ULL << vertex);
+				}
+				connectedComponentSupportVectors.push_back(supportVector);
+			}
+		}
+
+		Graph<> graph;
+		std::vector<std::vector<int>> connectedComponents;
+		// Support vector for each connected component (a bitstring with 1 
+		// for each vertex in the connected component and zeros elsewhere). 
+		std::vector<uint64_t> connectedComponentSupportVectors;
+	};
+
+
+	class PauliGrouper {
+	public:
+		PauliGrouper(
+			const Hamiltonian& hamiltonian,
+			const std::vector<Graph<>>& graphs,
+			int numThreads = 1,
+			bool extractComputationalBasis = true,
+			bool verboseLog = false
+		);
+
+		virtual ~PauliGrouper() = default;
+
+		explicit operator bool() const { return !paulis.empty(); };
+		virtual CollectionWithGraph groupOne();
+		std::vector<CollectionWithGraph> groupAll();
+
+		const auto& getCollections() const { return collections; }
+
+
+	protected:
+		void printStatus(bool deletePreviousLine, bool verbose);
+
+		const Hamiltonian& hamiltonian;
+		const std::vector<Graph<>>& graphs;
+		size_t numGraphsPerThread{};
+		int numThreads{};
+		bool extractComputationalBasis{};
+		bool verboseLog{};
+
+		std::vector<std::pair<Pauli, double>> paulis;
+		std::vector<GraphRepr> graphReprs;
+
+		std::vector<CollectionWithGraph> collections;
+		std::vector<HTCircuitFinder> finders;
+	};
+
+	class PauliGrouper2 : public PauliGrouper {
+	public:
+		PauliGrouper2(
+			const Hamiltonian& hamiltonian,
+			const Graph<>& graph,
+			int numThreads = 1,
+			bool extractComputationalBasis = true,
+			bool verboseLog = false,
+			unsigned int seed = 0,
+			int maxSubgraphs = 1000
+		);
+
+		CollectionWithGraph groupOne() override;
+
+	private:
+		std::mt19937_64 randomGenerator;
+		std::vector<Graph<>> getSubgraphsOnSupport(const Graph<>& graph, const Pauli& pauli);
+		int maxSubgraphs{};
+		Graph<> graph;
+	};
 }

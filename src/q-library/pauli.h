@@ -2,7 +2,7 @@
 #pragma once
 #include <cstdint>
 #include <string_view>
-#include <format>
+#include "formatting.h"
 #include "binary_phase.h"
 
 
@@ -62,6 +62,8 @@ namespace Q {
 		constexpr Bitstring getXString() const;
 		/// @brief Get the Z components of the Pauli as binary string, e.g. XYZI -> 0110
 		constexpr Bitstring getZString() const;
+
+		constexpr Bitstring getSupport() const;
 
 		/// @brief Get a binary string with 1 for each identity, e.g. XYZI -> 0001
 		constexpr Bitstring getIdentityString() const;
@@ -151,6 +153,7 @@ namespace Q {
 
 	constexpr int Pauli::identityCount() const { return n - pauliWeight(); }
 
+	constexpr Pauli::Bitstring Pauli::getSupport() const { return (r | s); }
 	constexpr Pauli::Bitstring Pauli::getIdentityString() const { return ~(r | s); }
 
 	constexpr Pauli::Bitstring Pauli::getXString() const { return r; }
@@ -283,14 +286,15 @@ namespace Q {
 	}
 }
 
+#include "fmt/format.h"
 
 template<class CharT>
-struct std::formatter<Q::Pauli, CharT> : std::formatter<std::string_view, CharT> {
+struct fmt::formatter<Q::Pauli, CharT> : fmt::formatter<std::string_view, CharT> {
 	template<class FormatContext>
 	auto format(const Q::Pauli& op, FormatContext& fc) const {
 		if (const auto phase = op.getPhase(); phase != Q::BinaryPhase{ 0 }) {
-			std::format_to(fc.out(), "{}", phase.toString());
+			fmt::format_to(fc.out(), "{}", phase.toString());
 		}
-		return std::format_to(fc.out(), "{}", op.toString());
+		return fmt::format_to(fc.out(), "{}", op.toString());
 	}
 };

@@ -6,18 +6,17 @@
 
 
 
-filename = hamiltonians/examples/H4_bk.json                # where to read the hamiltonian data from 
-outfilename = grouping_result/examples1/H4_bk.json  # where to output the grouping
+filename = hamiltonians/water/water_361g_star_bk_1914.json                # where to read the hamiltonian data from 
+outfilename = grouping_result/water/water_361g_star_bk_1914.json  # where to output the grouping
 connectivity = connectivities/linear.txt     # which connectivity file to use
 
 
 
-numGraphs = 1000            # Hyperparameter: Maximum number of random subgraphs
+numGraphs = 100            # Hyperparameter: Maximum number of random subgraphs
 maxEdgeCount = 1000              # Hyperparameter: Maximum number of edges for subgraphs
 sortGraphsByEdgeCount = true     # Sort possible subgraphs by edge count so graphs with lower edge count are preferred
 extractComputationalBasis = true # Pre-eliminate Paulis in the computational basis like IIZ, ZIZ, ZZZ, ...
-intermediateFileFrequency = 0    # If != 0, an output file is written in the form <filename>_savingpoint_X.<extension> for every nth group
 
 
 
-numThreads = 1                   # option for multithreading
+numThreads = 8                   # option for multithreading

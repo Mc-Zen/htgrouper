@@ -515,37 +515,37 @@ namespace Math {
 		}
 
 
-		friend std::ostream& operator<<(std::ostream& os, const Matrix& a) {
-			std::vector<size_type> col_widths(a.cols());
-			os << std::setfill(' ');
-			for (size_type j = 0; j < a.cols(); ++j) {
-				size_type max_len = 0;
-				for (size_type i = 0; i < a.rows(); ++i) {
-					std::ostringstream s;
-					s << a(i, j);
-					size_type len = s.str().size();
-					if (len > max_len) max_len = len;
-				}
-				col_widths[j] = max_len;
-			}
-
-			for (size_type i = 0; i < a.rows(); ++i) {
-				os << "| ";
+		/*	friend std::ostream& operator<<(std::ostream& os, const Matrix& a) {
+				std::vector<size_type> col_widths(a.cols());
+				os << std::setfill(' ');
 				for (size_type j = 0; j < a.cols(); ++j) {
-					std::ostringstream s;
-					s << a(i, j);
-					os << std::setw(col_widths[j]) << s.str() << ' ';
+					size_type max_len = 0;
+					for (size_type i = 0; i < a.rows(); ++i) {
+						std::ostringstream s;
+						s << a(i, j);
+						size_type len = s.str().size();
+						if (len > max_len) max_len = len;
+					}
+					col_widths[j] = max_len;
 				}
-				os << "|\n";
-			}
-			os.width(0);
-			return os << "\n";
-		}
+
+				for (size_type i = 0; i < a.rows(); ++i) {
+					os << "| ";
+					for (size_type j = 0; j < a.cols(); ++j) {
+						std::ostringstream s;
+						s << a(i, j);
+						os << std::setw(col_widths[j]) << s.str() << ' ';
+					}
+					os << "|\n";
+				}
+				os.width(0);
+				return os << "\n";
+			}*/
 
 
-		//
-		// Vector operations (specialization for 1×n or m×1 matrices) 
-		//
+			//
+			// Vector operations (specialization for 1×n or m×1 matrices) 
+			//
 		constexpr bool is_vector() const { return rows() == 1 || cols() == 1; }
 
 		constexpr T& operator[](size_type i) noexcept { return data_[i]; }
