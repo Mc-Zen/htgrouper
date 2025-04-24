@@ -9,7 +9,12 @@ We highly recommend using Visual Studio 2019 or 2022 (note: not Visual Studio Co
 In order to build and run the C++ code, you will need Visual Studio (a more thorough setup guide can be found [here](https://learn.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=msvc-170)). 
 
 - Get the Visual Studio Installer https://visualstudio.microsoft.com/de/downloads/. The Community Edition is for free and fully functional.
-- Start the installer and when prompted which packages to install check the __Desktop Development with C++__ and start the installation. 
+- Start the installer and when prompted which packages to install check the __Desktop Development with C++__ and start the installation.
+
+Ensure that you tick _at least_ the options:
+- MSVC V143 [...] (or comparable, depending on your version)
+- Windows 10 (or 11) SDK [...]
+- C++ CMake tool for Windows
 
 
 ![](images/install-desktop-development-with-c%2B%2B.png)
