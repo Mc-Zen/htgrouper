@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <bit>
 #include "matrix.h"
 #include "binary.h"
 
