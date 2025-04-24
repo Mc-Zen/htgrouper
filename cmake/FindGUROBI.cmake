@@ -4,18 +4,6 @@ find_path(GUROBI_INCLUDE_DIRS
     PATH_SUFFIXES include)
 
 find_library(GUROBI_LIBRARY
-<<<<<<< Updated upstream
-    NAMES gurobi gurobi100 gurobi110 
-    HINTS ${GUROBI_DIR} $ENV{GUROBI_HOME}
-    PATH_SUFFIXES lib)
-
-
-if(MSVC)
-    set(MSVC_YEAR "2017")
-    
-    if(MT)
-        set(M_FLAG "mt")
-=======
     NAMES gurobi gurobi100 gurobi110 gurobi120
     HINTS ${GUROBI_DIR} $ENV{GUROBI_HOME}
     PATH_SUFFIXES lib)
@@ -38,7 +26,6 @@ if(CXX)
             NAMES gurobi_c++${M_FLAG}d${MSVC_YEAR}
             HINTS ${GUROBI_DIR} $ENV{GUROBI_HOME}
             PATH_SUFFIXES lib)
->>>>>>> Stashed changes
     else()
         find_library(GUROBI_CXX_LIBRARY
             NAMES gurobi_c++
